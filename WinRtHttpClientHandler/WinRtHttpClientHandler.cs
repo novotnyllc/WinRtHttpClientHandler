@@ -4,14 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.Storage.Streams;
 using Windows.Web.Http.Filters;
-using Windows.Web.Http.Headers;
 using rt = Windows.Web.Http;
 
 
@@ -28,16 +24,16 @@ namespace WinRtHttpClientHandler
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var rtMessage = await ConvertHttpRequestMessaageToRt(request).ConfigureAwait(false);
+            var rtMessage = await ConvertHttpRequestMessaageToRt(request, cancellationToken).ConfigureAwait(false);
 
             var resp = await _client.SendRequestAsync(rtMessage).AsTask(cancellationToken).ConfigureAwait(false);
 
-            var netResp = await ConvertRtResponseMessageToNet(resp).ConfigureAwait(false);
+            var netResp = await ConvertRtResponseMessageToNet(resp, cancellationToken).ConfigureAwait(false);
 
             return netResp;
         }
 
-        internal static async Task<rt.HttpRequestMessage> ConvertHttpRequestMessaageToRt(HttpRequestMessage message)
+        internal static async Task<rt.HttpRequestMessage> ConvertHttpRequestMessaageToRt(HttpRequestMessage message, CancellationToken token)
         {
             var rt = new rt.HttpRequestMessage()
             {
@@ -55,13 +51,13 @@ namespace WinRtHttpClientHandler
             return rt;
         }
 
-        internal static async Task<HttpRequestMessage> ConvertRtRequestMessageToNet(rt.HttpRequestMessage message)
+        internal static async Task<HttpRequestMessage> ConvertRtRequestMessageToNet(rt.HttpRequestMessage message, CancellationToken token)
         {
             var req = new HttpRequestMessage()
             {
                 Method = new HttpMethod(message.Method.Method),
                 RequestUri = message.RequestUri,
-                Content = await GetNetContentFromRt(message.Content).ConfigureAwait(false),
+                Content = await GetNetContentFromRt(message.Content, token).ConfigureAwait(false),
             };
 
             foreach (var header in message.Headers)
@@ -87,7 +83,7 @@ namespace WinRtHttpClientHandler
             if (content == null)
                 return null;
 
-            var stream = await content.ReadAsStreamAsync();
+            var stream = await content.ReadAsStreamAsync().ConfigureAwait(false);
             var c = new rt.HttpStreamContent(stream.AsInputStream());
 
             CopyHeaders(content.Headers, c.Headers);
@@ -95,12 +91,12 @@ namespace WinRtHttpClientHandler
             return c;
         }
 
-        internal static async Task<HttpContent> GetNetContentFromRt(rt.IHttpContent content)
+        internal static async Task<HttpContent> GetNetContentFromRt(rt.IHttpContent content, CancellationToken token)
         {
             if(content == null)
                 return null;
 
-            var str = await content.ReadAsInputStreamAsync().AsTask().ConfigureAwait(false);
+            var str = await content.ReadAsInputStreamAsync().AsTask(token).ConfigureAwait(false);
 
             var c = new StreamContent(str.AsStreamForRead());
 
@@ -111,13 +107,13 @@ namespace WinRtHttpClientHandler
         }
 
 
-        internal static async Task<HttpResponseMessage> ConvertRtResponseMessageToNet(rt.HttpResponseMessage message)
+        internal static async Task<HttpResponseMessage> ConvertRtResponseMessageToNet(rt.HttpResponseMessage message, CancellationToken token)
         {
             var resp = new HttpResponseMessage((HttpStatusCode)(int)message.StatusCode)
             {
                 ReasonPhrase = message.ReasonPhrase,
-                RequestMessage = await ConvertRtRequestMessageToNet(message.RequestMessage).ConfigureAwait(false),
-                Content = await GetNetContentFromRt(message.Content).ConfigureAwait(false),
+                RequestMessage = await ConvertRtRequestMessageToNet(message.RequestMessage, token).ConfigureAwait(false),
+                Content = await GetNetContentFromRt(message.Content, token).ConfigureAwait(false),
                 
           //      Version = message.Source
             };
