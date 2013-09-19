@@ -102,6 +102,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="WinRtHttpClientHandler.cs" />

@@ -13,6 +13,9 @@ using rt = Windows.Web.Http;
 
 namespace WinRtHttpClientHandler
 {
+    /// <summary>
+    /// An HttpMessageHandler that lets you use the Windows Runtime IHttpFilter types
+    /// </summary>
     public class WinRtHttpClientHandler : HttpMessageHandler
     {
         private readonly rt.HttpClient _client;
