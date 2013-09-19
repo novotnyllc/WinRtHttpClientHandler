@@ -28,6 +28,8 @@ namespace WinRtHttpClientHandler
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
+            CheckDisposed();
+
             var rtMessage = await ConvertHttpRequestMessaageToRt(request, cancellationToken).ConfigureAwait(false);
 
             var resp = await _client.SendRequestAsync(rtMessage).AsTask(cancellationToken).ConfigureAwait(false);
@@ -130,7 +132,8 @@ namespace WinRtHttpClientHandler
 
         private void CheckDisposed()
         {
-            
+            if (_disposed)
+                throw new ObjectDisposedException("WinRtHttpClientHandler");
         }
 
         protected override void Dispose(bool disposing)
