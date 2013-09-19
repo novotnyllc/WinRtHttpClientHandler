@@ -19,8 +19,7 @@ namespace WinRtHttpClientHandler.Tests
 
          //   filter.IgnorableServerCertificateErrors.Add()
 
-            var handler = new WinRtHttpClientHandler(filter);
-            var client = new HttpClient(handler);
+            var client = new HttpClient(new WinRtHttpClientHandler(filter));
 
             var html = await client.GetStringAsync("http://www.microsoft.com");
 

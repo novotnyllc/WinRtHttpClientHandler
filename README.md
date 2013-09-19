@@ -23,3 +23,35 @@ a System.Net.Http.HttpClient to your PCL.
 Internally, the WinRtHttpClientHandler uses the Windows 8.1 WinRT HttpClient instead, so 
 you have more control over its pipeline.
 
+Sample usage in a PCL:
+----
+
+    public interface IHttpClientCreator
+    {
+        System.Net.Http.HttpClient Create();
+    }
+
+    public class MyWin81Factory : IHttpClientCreator
+    {
+        public System.Net.HttpClient Create()
+        {
+            var filter = new HttpBaseProtocolFilter(); // do something with this
+            filter.IgnorableServerCertificateErrors.Add(...)
+            var client = new System.Net.Http.HttpClient(new WinRtHttpClientHandler(filter));
+            return client;
+        }
+    }
+	
+    public class MyNetFxFactory : IHttpClientCreator
+    {
+        static MyNetFxFactory()
+        {
+            ServicePointManager.ServerCertificateValidationCallback = ...
+        }
+
+        public HttpClient Create()
+        {
+            var client = new HttpClient();
+        }
+    }
+        
