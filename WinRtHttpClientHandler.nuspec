@@ -7,7 +7,7 @@
         <authors>Oren Novotny</authors>
         <owners />
         <licenseUrl>http://choosealicense.com/licenses/apache/</licenseUrl>
-        <projectUrl>https://github.com/onovotny/Zeroconf</projectUrl>
+        <projectUrl>https://github.com/onovotny/WinRtHttpClientHandler</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>An HttpMessageHandler that lets you use the Windows Runtime IHttpFilter </description>
         <copyright>© Oren Novotny 2013</copyright>
