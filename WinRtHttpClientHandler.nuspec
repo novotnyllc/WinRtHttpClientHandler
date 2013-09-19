@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>WinRtHttpClientHandler</id>
+        <version>0.3.0-alpha1</version>
+        <title />
+        <authors>Oren Novotny</authors>
+        <owners />
+        <licenseUrl>http://choosealicense.com/licenses/apache/</licenseUrl>
+        <projectUrl>https://github.com/onovotny/Zeroconf</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>An HttpMessageHandler that lets you use the Windows Runtime IHttpFilter </description>
+        <copyright>© Oren Novotny 2013</copyright>
+        <language>en-US</language>
+        <tags>winrt win81 httpclient ssl ihttpfilter</tags>
+    </metadata>
+    <files>
+        <file src="WinRtHttpClientHandler\bin\Release\WinRtHttpClientHandler.dll" target="lib\win81\WinRtHttpClientHandler.dll" />
+        <file src="WinRtHttpClientHandler\bin\Release\WinRtHttpClientHandler.pdb" target="lib\win81\WinRtHttpClientHandler.pdb" />
+        <file src="WinRtHttpClientHandler\bin\Release\WinRtHttpClientHandler.pri" target="lib\win81\WinRtHttpClientHandler.pri" />
+        <file src="WinRtHttpClientHandler\bin\Release\WinRtHttpClientHandler.xml" target="lib\win81\WinRtHttpClientHandler.xml" />
+
+        <file src="**\*.cs" target="src" exclude="_ReSharper.*\**\*.*;packages\**\*.*;**\Debug\**\*.*;**\Release\**\*.*"/>       
+    </files>
+</package>

@@ -23,6 +23,12 @@ a System.Net.Http.HttpClient to your PCL.
 Internally, the WinRtHttpClientHandler uses the Windows 8.1 WinRT HttpClient instead, so 
 you have more control over its pipeline.
 
+Installation
+----
+The easiest way to get started is to use the NuGet package.
+
+Install-Package [WinRtHttpClientHandler](http://www.nuget.org/packages/WinRtHttpClientHandler) -pre
+
 Sample usage in a PCL:
 ----
 
