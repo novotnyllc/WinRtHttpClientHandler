@@ -19,6 +19,7 @@ namespace WinRtHttpClientHandler
     public class WinRtHttpClientHandler : HttpMessageHandler
     {
         private readonly rt.HttpClient _client;
+        private bool _disposed = false;
 
         public WinRtHttpClientHandler(IHttpFilter httpFilter)
         {
@@ -125,6 +126,23 @@ namespace WinRtHttpClientHandler
                 resp.Headers.TryAddWithoutValidation(header.Key, header.Value);
             
             return resp;
+        }
+
+        private void CheckDisposed()
+        {
+            
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && !_disposed)
+            {
+                _client.Dispose();
+
+                _disposed = true;
+            }
+
+            base.Dispose(disposing);
         }
     }
 }
