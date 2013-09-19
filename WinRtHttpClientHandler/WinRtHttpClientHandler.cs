@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
+using Windows.Web.Http.Filters;
 using Windows.Web.Http.Headers;
 using rt = Windows.Web.Http;
 
@@ -18,7 +19,12 @@ namespace WinRtHttpClientHandler
 {
     public class WinRtHttpClientHandler : HttpMessageHandler
     {
-        readonly rt.HttpClient _client = new rt.HttpClient();
+        private readonly rt.HttpClient _client;
+
+        public WinRtHttpClientHandler(IHttpFilter httpFilter)
+        {
+            _client = new rt.HttpClient(httpFilter);
+        }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
