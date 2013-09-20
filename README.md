@@ -9,7 +9,7 @@ a concrete HttpClient for your app's use.
 The main motivation for this is due to the need for supporting invalid SSL certificates.
 While generally bad practice, there are some cases where you need to connect
 to an endpoint without a valid SSL certificate. In .NET, you can either use the `WebRequestHandler`
-or ServicePointManager to override SSL validation. Windows 8.1 does this with its new
+or `ServicePointManager` to override SSL validation. Windows 8.1 does this with its new
 `Windows.Web.HttpClient`. 
 
 The problem occurs if you want to use Portable Class Libraries to share logic between platforms.
