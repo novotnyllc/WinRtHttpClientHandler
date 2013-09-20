@@ -14,10 +14,13 @@ using rt = Windows.Web.Http;
 namespace WinRtHttpClientHandler
 {
     /// <summary>
-    /// An HttpMessageHandler that lets you use the Windows Runtime IHttpFilter types
+    ///     An HttpMessageHandler that lets you use the Windows Runtime IHttpFilter types
     /// </summary>
     public class WinRtHttpClientHandler : HttpMessageHandler
     {
+        private static readonly Version NoVersion = new Version(0, 0);
+        private static readonly Version Version10 = new Version(1, 0);
+        private static readonly Version Version11 = new Version(1, 1);
         private readonly rt.HttpClient _client;
         private bool _disposed = false;
 
@@ -43,15 +46,14 @@ namespace WinRtHttpClientHandler
         {
             var rt = new rt.HttpRequestMessage()
             {
-              Method  =  new rt.HttpMethod(message.Method.Method),
-              Content =  await GetContentFromNet(message.Content).ConfigureAwait(false),
-              RequestUri = message.RequestUri,
-              
+                Method = new rt.HttpMethod(message.Method.Method),
+                Content = await GetContentFromNet(message.Content).ConfigureAwait(false),
+                RequestUri = message.RequestUri,
             };
 
             CopyHeaders(message.Headers, rt.Headers);
 
-            foreach(var prop in message.Properties)
+            foreach (var prop in message.Properties)
                 rt.Properties.Add(prop);
 
             return rt;
@@ -71,16 +73,16 @@ namespace WinRtHttpClientHandler
 
             foreach (var prop in message.Properties)
                 req.Properties.Add(prop);
-            
+
             return req;
         }
 
         internal static void CopyHeaders(IEnumerable<KeyValuePair<string, IEnumerable<string>>> source, IDictionary<string, string> destination)
         {
             var headers = from kvp in source
-                          from val in kvp.Value
-                          select new KeyValuePair<string, string>(kvp.Key, val);
-            foreach(var header in headers)
+                from val in kvp.Value
+                select new KeyValuePair<string, string>(kvp.Key, val);
+            foreach (var header in headers)
                 destination.Add(header);
         }
 
@@ -93,13 +95,13 @@ namespace WinRtHttpClientHandler
             var c = new rt.HttpStreamContent(stream.AsInputStream());
 
             CopyHeaders(content.Headers, c.Headers);
-            
+
             return c;
         }
 
         internal static async Task<HttpContent> GetNetContentFromRt(rt.IHttpContent content, CancellationToken token)
         {
-            if(content == null)
+            if (content == null)
                 return null;
 
             var str = await content.ReadAsInputStreamAsync().AsTask(token).ConfigureAwait(false);
@@ -112,7 +114,6 @@ namespace WinRtHttpClientHandler
             return c;
         }
 
-
         internal static async Task<HttpResponseMessage> ConvertRtResponseMessageToNet(rt.HttpResponseMessage message, CancellationToken token)
         {
             var resp = new HttpResponseMessage((HttpStatusCode)(int)message.StatusCode)
@@ -120,14 +121,31 @@ namespace WinRtHttpClientHandler
                 ReasonPhrase = message.ReasonPhrase,
                 RequestMessage = await ConvertRtRequestMessageToNet(message.RequestMessage, token).ConfigureAwait(false),
                 Content = await GetNetContentFromRt(message.Content, token).ConfigureAwait(false),
-                
-          //      Version = message.Source
+                Version = GetVersionFromEnum(message.Version),
             };
 
             foreach (var header in message.Headers)
                 resp.Headers.TryAddWithoutValidation(header.Key, header.Value);
-            
+
             return resp;
+        }
+
+        internal static Version GetVersionFromEnum(rt.HttpVersion version)
+        {
+            switch (version)
+            {
+                case rt.HttpVersion.None:
+                    return NoVersion;
+                    break;
+                case rt.HttpVersion.Http10:
+                    return Version10;
+                    break;
+                case rt.HttpVersion.Http11:
+                    return Version11;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("version");
+            }
         }
 
         private void CheckDisposed()
