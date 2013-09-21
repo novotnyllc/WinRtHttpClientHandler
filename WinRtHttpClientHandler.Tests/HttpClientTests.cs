@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Web.Http.Filters;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Newtonsoft.Json;
 
-namespace WinRtHttpClientHandler.Tests
+
+namespace WindowsRuntime.HttpClientFilters.Tests
 {
     [TestClass]
     public class HttpClientTests

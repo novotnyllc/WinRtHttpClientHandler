@@ -11,7 +11,7 @@ using Windows.Web.Http.Filters;
 using rt = Windows.Web.Http;
 
 
-namespace WinRtHttpClientHandler
+namespace WindowsRuntime.HttpClientFilters
 {
     /// <summary>
     ///     An HttpMessageHandler that lets you use the Windows Runtime IHttpFilter types

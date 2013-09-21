@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>WinRtHttpClientHandler</id>
-        <version>0.3.0-alpha2</version>
+        <version>0.3.0-beta1</version>
         <title />
         <authors>Oren Novotny</authors>
         <owners />
@@ -15,10 +15,10 @@
         <tags>winrt win81 httpclient ssl ihttpfilter</tags>
     </metadata>
     <files>
-        <file src="WinRtHttpClientHandler\bin\Release\WinRtHttpClientHandler.dll" target="lib\win81\WinRtHttpClientHandler.dll" />
-        <file src="WinRtHttpClientHandler\bin\Release\WinRtHttpClientHandler.pdb" target="lib\win81\WinRtHttpClientHandler.pdb" />
-        <file src="WinRtHttpClientHandler\bin\Release\WinRtHttpClientHandler.pri" target="lib\win81\WinRtHttpClientHandler.pri" />
-        <file src="WinRtHttpClientHandler\bin\Release\WinRtHttpClientHandler.xml" target="lib\win81\WinRtHttpClientHandler.xml" />
+        <file src="WinRtHttpClientHandler\bin\Release\WindowsRuntime.HttpClientFilters.dll" target="lib\win81\WindowsRuntime.HttpClientFilters.dll" />
+        <file src="WinRtHttpClientHandler\bin\Release\WindowsRuntime.HttpClientFilters.pdb" target="lib\win81\WindowsRuntime.HttpClientFilters.pdb" />
+        <file src="WinRtHttpClientHandler\bin\Release\WindowsRuntime.HttpClientFilters.pri" target="lib\win81\WindowsRuntime.HttpClientFilters.pri" />
+        <file src="WinRtHttpClientHandler\bin\Release\WindowsRuntime.HttpClientFilters.xml" target="lib\win81\WindowsRuntime.HttpClientFilters.xml" />
 
         <file src="**\*.cs" target="src" exclude="_ReSharper.*\**\*.*;packages\**\*.*;**\Debug\**\*.*;**\Release\**\*.*"/>       
     </files>

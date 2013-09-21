@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.20827.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinRtHttpClientHandler", "WinRtHttpClientHandler\WinRtHttpClientHandler.csproj", "{7DBE6688-5960-4B28-8B90-9367C54D2EE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsRuntime.HttpClientFilters", "WinRtHttpClientHandler\WindowsRuntime.HttpClientFilters.csproj", "{7DBE6688-5960-4B28-8B90-9367C54D2EE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinRtHttpClientHandler.Tests", "WinRtHttpClientHandler.Tests\WinRtHttpClientHandler.Tests.csproj", "{D2763A24-94C4-40FD-87BC-EA5DCF8B0F30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsRuntime.HttpClientFilters.Tests", "WinRtHttpClientHandler.Tests\WindowsRuntime.HttpClientFilters.Tests.csproj", "{D2763A24-94C4-40FD-87BC-EA5DCF8B0F30}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{384D7488-7706-4423-8B50-2B4EB6AB1F07}"
 	ProjectSection(SolutionItems) = preProject
