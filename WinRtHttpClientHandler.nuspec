@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>WinRtHttpClientHandler</id>
-        <version>0.3.0-beta1</version>
+        <version>1.0</version>
         <title />
         <authors>Oren Novotny</authors>
         <owners />
@@ -12,13 +12,13 @@
         <description>An HttpMessageHandler that lets you use the Windows Runtime IHttpFilter </description>
         <copyright>© Oren Novotny 2013</copyright>
         <language>en-US</language>
-        <tags>winrt win81 httpclient ssl ihttpfilter</tags>
+        <tags>winrt win81 wpa81 wp8 httpclient ssl ihttpfilter</tags>
     </metadata>
     <files>
-        <file src="WinRtHttpClientHandler\bin\Release\WindowsRuntime.HttpClientFilters.dll" target="lib\win81\WindowsRuntime.HttpClientFilters.dll" />
-        <file src="WinRtHttpClientHandler\bin\Release\WindowsRuntime.HttpClientFilters.pdb" target="lib\win81\WindowsRuntime.HttpClientFilters.pdb" />
-        <file src="WinRtHttpClientHandler\bin\Release\WindowsRuntime.HttpClientFilters.pri" target="lib\win81\WindowsRuntime.HttpClientFilters.pri" />
-        <file src="WinRtHttpClientHandler\bin\Release\WindowsRuntime.HttpClientFilters.xml" target="lib\win81\WindowsRuntime.HttpClientFilters.xml" />
+        <file src="WinRtHttpClientHandler\bin\Release\WindowsRuntime.HttpClientFilters.dll" target="lib\portable-win81+wpa81\WindowsRuntime.HttpClientFilters.dll" />
+        <file src="WinRtHttpClientHandler\bin\Release\WindowsRuntime.HttpClientFilters.pdb" target="lib\portable-win81+wpa81\WindowsRuntime.HttpClientFilters.pdb" />
+        <file src="WinRtHttpClientHandler\bin\Release\WindowsRuntime.HttpClientFilters.pri" target="lib\portable-win81+wpa81\WindowsRuntime.HttpClientFilters.pri" />
+        <file src="WinRtHttpClientHandler\bin\Release\WindowsRuntime.HttpClientFilters.xml" target="lib\portable-win81+wpa81\WindowsRuntime.HttpClientFilters.xml" />
 
         <file src="**\*.cs" target="src" exclude="_ReSharper.*\**\*.*;packages\**\*.*;**\Debug\**\*.*;**\Release\**\*.*"/>       
     </files>
